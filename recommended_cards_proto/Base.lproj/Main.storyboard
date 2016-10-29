@@ -21,6 +21,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="1436" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="suggested_card_tray" translatesAutoresizingMaskIntoConstraints="NO" id="lTU-Da-KpZ">
+                                <rect key="frame" x="-8" y="176" width="389" height="501"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="zCg-pG-QAb" appends="YES" id="7lh-ha-Mul"/>
+                                </connections>
+                            </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EvA-1E-mTz">
                                 <rect key="frame" x="0.0" y="202" width="1440" height="465"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -42,7 +50,6 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="U2U-nc-IA7" appends="YES" id="cMi-nJ-byB"/>
@@ -56,10 +63,16 @@
                     <connections>
                         <outlet property="suggestedCard" destination="Cix-3v-lTb" id="3R6-ds-mZN"/>
                         <outlet property="suggestedCardParentView" destination="EvA-1E-mTz" id="2j3-C4-7NA"/>
+                        <outlet property="suggestedCardTray" destination="lTU-Da-KpZ" id="tjl-Tw-3f4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="U2U-nc-IA7">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="zCg-pG-QAb" userLabel="Tray Pan Gesture Recognizer">
+                    <connections>
+                        <action selector="didPanTray:" destination="BYZ-38-t0r" id="YqZ-03-E16"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="U2U-nc-IA7" userLabel="Sug Card Pan Gesture Recognizer">
                     <connections>
                         <action selector="didPanSuggestedCardParent:" destination="BYZ-38-t0r" id="cA6-u8-17h"/>
                     </connections>
@@ -69,6 +82,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="suggested_card_tray" width="389" height="501"/>
         <image name="suggestion_group1_card1" width="352" height="342"/>
         <image name="suggestion_group1_card2" width="352" height="342"/>
         <image name="suggestion_group1_card3" width="352" height="342"/>

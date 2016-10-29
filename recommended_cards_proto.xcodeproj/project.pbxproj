@@ -15,6 +15,7 @@
 		443CFFB01DC431B600861B21 /* recommended_cards_protoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CFFAF1DC431B600861B21 /* recommended_cards_protoTests.swift */; };
 		443CFFBB1DC431B600861B21 /* recommended_cards_protoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CFFBA1DC431B600861B21 /* recommended_cards_protoUITests.swift */; };
 		443CFFCB1DC439B000861B21 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CFFCA1DC439B000861B21 /* SuggestionViewController.swift */; };
+		44FD849D1DC44A29002FECB4 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FD849C1DC44A29002FECB4 /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		443CFFBA1DC431B600861B21 /* recommended_cards_protoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recommended_cards_protoUITests.swift; sourceTree = "<group>"; };
 		443CFFBC1DC431B600861B21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		443CFFCA1DC439B000861B21 /* SuggestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
+		44FD849C1DC44A29002FECB4 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				443CFF9E1DC431B600861B21 /* Main.storyboard */,
 				443CFFA11DC431B600861B21 /* Assets.xcassets */,
 				443CFFA31DC431B600861B21 /* LaunchScreen.storyboard */,
+				44FD849C1DC44A29002FECB4 /* Common.swift */,
 				443CFFA61DC431B600861B21 /* Info.plist */,
 			);
 			path = recommended_cards_proto;
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44FD849D1DC44A29002FECB4 /* Common.swift in Sources */,
 				443CFF9D1DC431B600861B21 /* ViewController.swift in Sources */,
 				443CFF9B1DC431B600861B21 /* AppDelegate.swift in Sources */,
 				443CFFCB1DC439B000861B21 /* SuggestionViewController.swift in Sources */,
@@ -509,6 +513,7 @@
 				443CFFC11DC431B600861B21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		443CFFC21DC431B600861B21 /* Build configuration list for PBXNativeTarget "recommended_cards_protoTests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +522,7 @@
 				443CFFC41DC431B600861B21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		443CFFC51DC431B600861B21 /* Build configuration list for PBXNativeTarget "recommended_cards_protoUITests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +531,7 @@
 				443CFFC71DC431B600861B21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

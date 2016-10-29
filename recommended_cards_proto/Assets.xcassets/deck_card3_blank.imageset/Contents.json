@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "deck_card3_blank.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "deck_card3_blank@2x.png",
       "scale" : "2x"
     },
     {

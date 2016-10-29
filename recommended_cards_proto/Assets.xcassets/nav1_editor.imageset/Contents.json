@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "nav1_editor.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "nav1_editor@2x.png",
       "scale" : "2x"
     },
     {

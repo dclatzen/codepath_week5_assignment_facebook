@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "suggested_card_tray.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "suggested_card_tray@2x.png",
       "scale" : "2x"
     },
     {
