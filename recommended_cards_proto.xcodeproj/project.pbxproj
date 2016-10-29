@@ -14,6 +14,7 @@
 		443CFFA51DC431B600861B21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 443CFFA31DC431B600861B21 /* LaunchScreen.storyboard */; };
 		443CFFB01DC431B600861B21 /* recommended_cards_protoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CFFAF1DC431B600861B21 /* recommended_cards_protoTests.swift */; };
 		443CFFBB1DC431B600861B21 /* recommended_cards_protoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CFFBA1DC431B600861B21 /* recommended_cards_protoUITests.swift */; };
+		443CFFCB1DC439B000861B21 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CFFCA1DC439B000861B21 /* SuggestionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		443CFFB61DC431B600861B21 /* recommended_cards_protoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = recommended_cards_protoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		443CFFBA1DC431B600861B21 /* recommended_cards_protoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recommended_cards_protoUITests.swift; sourceTree = "<group>"; };
 		443CFFBC1DC431B600861B21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		443CFFCA1DC439B000861B21 /* SuggestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		443CFF8E1DC431B600861B21 = {
 			isa = PBXGroup;
 			children = (
+				443CFFCA1DC439B000861B21 /* SuggestionViewController.swift */,
 				443CFF991DC431B600861B21 /* recommended_cards_proto */,
 				443CFFAE1DC431B600861B21 /* recommended_cards_protoTests */,
 				443CFFB91DC431B600861B21 /* recommended_cards_protoUITests */,
@@ -261,6 +264,7 @@
 			files = (
 				443CFF9D1DC431B600861B21 /* ViewController.swift in Sources */,
 				443CFF9B1DC431B600861B21 /* AppDelegate.swift in Sources */,
+				443CFFCB1DC439B000861B21 /* SuggestionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
