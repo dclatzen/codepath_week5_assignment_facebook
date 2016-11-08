@@ -11,11 +11,17 @@ import UIKit
 class SuggestionViewController: UIViewController {
     
     @IBOutlet weak var suggestedCardParentView: UIView!
-    @IBOutlet weak var suggestedCard: UIImageView!
     @IBOutlet weak var suggestedCardTray: UIImageView!
     @IBOutlet weak var deckCardParentView: UIView!
     @IBOutlet weak var deckCard: UIImageView!
     @IBOutlet weak var replaceIcon: UIImageView!
+    
+    // create outlets for all suggested cards. will add to array later.
+    
+    @IBOutlet weak var suggestedCard0: UIImageView!
+    @IBOutlet weak var suggestedCard1: UIImageView!
+    @IBOutlet weak var suggestedCard2: UIImageView!
+    @IBOutlet weak var suggestedCard3: UIImageView!
     
     
     // set up initial positions of the suggestion parent
@@ -47,6 +53,11 @@ class SuggestionViewController: UIViewController {
     // deck cards
     var deckParentOriginalX: CGFloat!
     
+    // establish the concept of a "current card" in suggestions
+    var currentCard: UIImageView!
+    var currentCardIndex: Int!
+    var suggestedCards: [UIImageView]!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +66,14 @@ class SuggestionViewController: UIViewController {
         suggestedParentOriginalX = suggestedCardParentView.center.x
         
         replaceIcon.alpha = 0
+        
+        // populate [suggestedCards] with all the cards. set up currentCard
+        suggestedCards = [suggestedCard0, suggestedCard1, suggestedCard2, suggestedCard3]
+        
+        currentCardIndex = 0
+        currentCard = suggestedCards[currentCardIndex]
+        
+        print("Print is working.")
         
     }
     
@@ -67,7 +86,7 @@ class SuggestionViewController: UIViewController {
         let translation = sender.translation(in: view)
         
         // half of a card's width, plus half the gap between cards
-        halfWay = ((suggestedCard.frame.width + 10) / 2)
+        halfWay = ((currentCard.frame.width + 10) / 2)
         
         didPanHalfWayRight = Double(translation.x) > Double(halfWay)
         didPanHalfWayLeft = translation.x < 0 && translation.x < -halfWay
@@ -86,13 +105,24 @@ class SuggestionViewController: UIViewController {
                 
                 // if the user panned more than halfway to the next card, advance to the next card
                 if self.didPanHalfWayLeft! {
-                    self.suggestedCardParentView.center.x = self.suggestedParentOriginalX - (self.suggestedCard.frame.width + 2)
+                    self.suggestedCardParentView.center.x = self.suggestedParentOriginalX - (self.currentCard.frame.width + 2)
+                    self.currentCardIndex = self.currentCardIndex + 1
+                    self.currentCard = self.suggestedCards[self.currentCardIndex]
+                    
                     print ("Did pan halfway left.")
+                    print("currentCardIndex: \(self.currentCardIndex)")
+                    
                 } else if self.didPanHalfWayRight! {
-                    self.suggestedCardParentView.center.x = self.suggestedParentOriginalX + (self.suggestedCard.frame.width + 2)
+                    self.suggestedCardParentView.center.x = self.suggestedParentOriginalX + (self.currentCard.frame.width + 2)
+                    
+                    self.currentCardIndex = self.currentCardIndex - 1
+                    self.currentCard = self.suggestedCards[self.currentCardIndex]
+                    
                     print("Did pan halfway right")
+                    print("currentCardIndex: \(self.currentCardIndex)")
                 }
-                    // otherwise snap the current card back to center
+                    
+                // otherwise snap the current card back to center
                 else {
                     self.suggestedCardParentView.center.x = self.suggestedParentOriginalX
                     
@@ -199,18 +229,30 @@ class SuggestionViewController: UIViewController {
             // add the new image to the current view
             view.addSubview(duplicatedCard)
             
+            print ("addSubview completed. center.x: \(duplicatedCard.center.x)")
+            print ("addSubview completed. center.y: \(duplicatedCard.center.y)")
+            
             // set the center of the duplicate card
             duplicatedCard.center = imageView.center
             
+            print ("'duplicatedCard.center = imageView.center' completed. center.x: \(duplicatedCard.center.x)")
+            print ("'duplicatedCard.center = imageView.center' completed. center.y: \(duplicatedCard.center.y)")
+            
             // center the new card
-            duplicatedCard.center.y += suggestedCard.center.y - 10
-            duplicatedCard.center.x = suggestedCard.center.x
+            duplicatedCard.center.y += currentCard.center.y - 9
+            duplicatedCard.center.x -= (currentCard.frame.width + 2) * CGFloat(currentCardIndex)
+            
+            
+            print ("duplicatedCard.center + currentCard.center.y = \(duplicatedCard.center.y) + \(currentCard.center.y) = \(duplicatedCard.center.y + currentCard.center.y)")
+            print ("duplicatedCard.center.y should = \(duplicatedCard.center.y + currentCard.center.y)")
+            print ("duplicatedCard.center.y actually = \(duplicatedCard.center.y)")
+            
             
             // record the original center
             duplicatedCardOriginalCenter = duplicatedCard.center
             
             // hide the suggested card, giving the impression that the duplicate card is the suggested card
-            self.suggestedCard.isHidden = true
+            self.currentCard.isHidden = true
             
             print ("Duplicate card center.x: \(duplicatedCard.center.x)")
             
@@ -273,7 +315,7 @@ class SuggestionViewController: UIViewController {
             // Do these after release, with a delay
             delay(0.3, closure: {
                 self.duplicatedCard.removeFromSuperview()
-                self.suggestedCard.isHidden = false
+                self.currentCard.isHidden = false
             })
             
             

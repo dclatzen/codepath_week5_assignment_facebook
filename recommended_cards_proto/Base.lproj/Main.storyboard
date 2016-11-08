@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,31 +13,27 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SuggestionViewController" customModule="recommended_cards_proto" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="Master View">
                         <rect key="frame" x="0.0" y="0.0" width="1436" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bXQ-Cx-qhO" userLabel="Deck card parent view">
+                            <view contentMode="scaleToFill" id="bXQ-Cx-qhO" userLabel="Deck card parent view">
                                 <rect key="frame" x="0.0" y="0.0" width="1082" height="346"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="deck_card1_language" translatesAutoresizingMaskIntoConstraints="NO" id="g4g-bk-hJB">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="deck_card1_language" id="g4g-bk-hJB">
                                         <rect key="frame" x="11" y="20" width="352" height="307"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="deck_card2_cultural" translatesAutoresizingMaskIntoConstraints="NO" id="oHv-Th-3B0">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="deck_card2_cultural" id="oHv-Th-3B0">
                                         <rect key="frame" x="365" y="20" width="352" height="307"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="deck_card3_blank" translatesAutoresizingMaskIntoConstraints="NO" id="5Qo-l3-Zje">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="deck_card3_blank" id="5Qo-l3-Zje">
                                         <rect key="frame" x="719" y="21" width="352" height="306"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="replace_symbol" translatesAutoresizingMaskIntoConstraints="NO" id="R2k-qm-z90">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="replace_symbol" id="R2k-qm-z90">
                                         <rect key="frame" x="118" y="31" width="139" height="163"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
@@ -48,7 +44,7 @@
                                     <outletCollection property="gestureRecognizers" destination="oGF-2O-bwe" appends="YES" id="I4z-1m-kk1"/>
                                 </connections>
                             </view>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="suggested_card_tray" translatesAutoresizingMaskIntoConstraints="NO" id="lTU-Da-KpZ">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggested_card_tray" id="lTU-Da-KpZ">
                                 <rect key="frame" x="-8" y="176" width="389" height="501"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <gestureRecognizers/>
@@ -56,11 +52,11 @@
                                     <outletCollection property="gestureRecognizers" destination="zCg-pG-QAb" appends="YES" id="7lh-ha-Mul"/>
                                 </connections>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EvA-1E-mTz">
+                            <view contentMode="scaleToFill" id="EvA-1E-mTz">
                                 <rect key="frame" x="0.0" y="202" width="1440" height="465"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="suggestion_group1_card2" translatesAutoresizingMaskIntoConstraints="NO" id="Cix-3v-lTb">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group1_card2" id="Cix-3v-lTb" userLabel="Suggested Card0">
                                         <rect key="frame" x="11" y="40" width="352" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <gestureRecognizers/>
@@ -68,15 +64,7 @@
                                             <outletCollection property="gestureRecognizers" destination="gRJ-Ea-T7H" appends="YES" id="ECg-4S-Mb8"/>
                                         </connections>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="suggestion_group1_card3" translatesAutoresizingMaskIntoConstraints="NO" id="TP1-c6-BC3">
-                                        <rect key="frame" x="719" y="40" width="352" height="342"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="btL-9h-jtQ" appends="YES" id="XMk-rf-sK4"/>
-                                        </connections>
-                                    </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="suggestion_group1_card1" translatesAutoresizingMaskIntoConstraints="NO" id="53F-Ag-bum">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group1_card1" id="53F-Ag-bum">
                                         <rect key="frame" x="365" y="40" width="352" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <gestureRecognizers/>
@@ -84,7 +72,15 @@
                                             <outletCollection property="gestureRecognizers" destination="sRR-O3-U7r" appends="YES" id="PMM-Ph-tcb"/>
                                         </connections>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="suggestion_group1_card4" translatesAutoresizingMaskIntoConstraints="NO" id="YC3-fS-vbU">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group1_card3" id="TP1-c6-BC3">
+                                        <rect key="frame" x="719" y="40" width="352" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="btL-9h-jtQ" appends="YES" id="XMk-rf-sK4"/>
+                                        </connections>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group1_card4" id="YC3-fS-vbU">
                                         <rect key="frame" x="1073" y="40" width="352" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <gestureRecognizers/>
@@ -107,7 +103,10 @@
                         <outlet property="deckCard" destination="g4g-bk-hJB" id="YE6-ZP-N4s"/>
                         <outlet property="deckCardParentView" destination="bXQ-Cx-qhO" id="dB0-qg-ZKA"/>
                         <outlet property="replaceIcon" destination="R2k-qm-z90" id="I6u-FM-Mpe"/>
-                        <outlet property="suggestedCard" destination="Cix-3v-lTb" id="3R6-ds-mZN"/>
+                        <outlet property="suggestedCard0" destination="Cix-3v-lTb" id="eyV-HO-DM1"/>
+                        <outlet property="suggestedCard1" destination="53F-Ag-bum" id="Lv4-aJ-pSw"/>
+                        <outlet property="suggestedCard2" destination="TP1-c6-BC3" id="y5B-vm-qYm"/>
+                        <outlet property="suggestedCard3" destination="YC3-fS-vbU" id="KsG-7q-k7e"/>
                         <outlet property="suggestedCardParentView" destination="EvA-1E-mTz" id="2j3-C4-7NA"/>
                         <outlet property="suggestedCardTray" destination="lTU-Da-KpZ" id="tjl-Tw-3f4"/>
                     </connections>
@@ -150,7 +149,7 @@
                 </panGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="UhN-bG-L5B"/>
             </objects>
-            <point key="canvasLocation" x="35.200000000000003" y="37.331334332833585"/>
+            <point key="canvasLocation" x="22" y="41.5"/>
         </scene>
     </scenes>
     <resources>
@@ -164,4 +163,9 @@
         <image name="suggestion_group1_card3" width="352" height="342"/>
         <image name="suggestion_group1_card4" width="352" height="342"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>
