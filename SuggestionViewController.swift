@@ -203,11 +203,14 @@ class SuggestionViewController: UIViewController {
             duplicatedCard.center = imageView.center
             
             // center the new card
-            duplicatedCard.center.y += suggestedCard.center.y
+            duplicatedCard.center.y += suggestedCard.center.y - 10
             duplicatedCard.center.x = suggestedCard.center.x
             
             // record the original center
             duplicatedCardOriginalCenter = duplicatedCard.center
+            
+            // hide the suggested card, giving the impression that the duplicate card is the suggested card
+            self.suggestedCard.isHidden = true
             
             print ("Duplicate card center.x: \(duplicatedCard.center.x)")
             
@@ -221,9 +224,9 @@ class SuggestionViewController: UIViewController {
             
             /////// Dragging Replace or Add a Deck Card ///////
             
-            replacingDeckCard = duplicatedCard.center.x > 75 && duplicatedCard.center.x < 300 && duplicatedCard.center.y > 190
+            replacingDeckCard = duplicatedCard.center.x > 75 && duplicatedCard.center.x < 350 && duplicatedCard.center.y < 350
             
-            addingDeckCard = (duplicatedCard.center.x < 75 || duplicatedCard.center.x > 300) && duplicatedCard.center.y > 190
+            addingDeckCard = (duplicatedCard.center.x < 75 || duplicatedCard.center.x > 300) && duplicatedCard.center.y > 300
             
             // Dragging to replace a deck card
             
@@ -231,7 +234,6 @@ class SuggestionViewController: UIViewController {
                 
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: {
                     
-                    self.suggestedCard.isHidden = true
                     self.suggestedCardTray.frame.origin.y = self.suggestedTrayDown
                     self.deckCard.alpha = 0.4
                     self.replaceIcon.alpha = 1
@@ -258,7 +260,22 @@ class SuggestionViewController: UIViewController {
             
         } else if sender.state == .ended {
             
-            // upon release, animate the duplicated card to the deck target
+            // Do these immediately upon release
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: [.curveEaseOut], animations: {
+                
+                self.duplicatedCard.center = CGPoint(x: self.duplicatedCardOriginalCenter.x, y: self.duplicatedCardOriginalCenter.y)
+                
+                self.suggestedCardTray.frame.origin.y = self.suggestedTrayUp
+                self.deckCard.alpha = 1
+                self.replaceIcon.alpha = 0
+            })
+            
+            // Do these after release, with a delay
+            delay(0.3, closure: {
+                self.duplicatedCard.removeFromSuperview()
+                self.suggestedCard.isHidden = false
+            })
+            
             
             if replacingDeckCard! {
                 // move the suggested card into the deck card's place
