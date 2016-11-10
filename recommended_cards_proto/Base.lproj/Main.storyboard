@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1082" height="346"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="deck_card1_language" id="g4g-bk-hJB">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="deck_card1_language" id="g4g-bk-hJB" userLabel="Deck Card0">
                                         <rect key="frame" x="11" y="20" width="352" height="307"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
@@ -88,25 +88,72 @@
                                             <outletCollection property="gestureRecognizers" destination="YWI-9K-sgL" appends="YES" id="Byr-0Y-lbE"/>
                                         </connections>
                                     </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group2_card1" id="s9z-S5-9iP">
+                                        <rect key="frame" x="12" y="40" width="350" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group2_card2" id="7Tm-vS-qx9">
+                                        <rect key="frame" x="364" y="40" width="352" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group2_card3" id="qbX-Ha-SNK">
+                                        <rect key="frame" x="719" y="39" width="351" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group2_card4" id="1KH-zb-NM2">
+                                        <rect key="frame" x="1074" y="40" width="351" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group3_card1" id="1NN-tZ-jtL">
+                                        <rect key="frame" x="11" y="40" width="350" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group3_card2" id="AlK-3Y-Gi4">
+                                        <rect key="frame" x="364" y="40" width="352" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group3_card3" id="MCC-mB-Nyo">
+                                        <rect key="frame" x="719" y="39" width="351" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group3_card4" id="94J-2y-eqJ">
+                                        <rect key="frame" x="1073" y="40" width="351" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="U2U-nc-IA7" appends="YES" id="cMi-nJ-byB"/>
                                 </connections>
                             </view>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="dummy_card" id="dz1-jp-qfR">
+                                <rect key="frame" x="10" y="262" width="355" height="306"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1436" height="667"/>
                     <connections>
-                        <outlet property="deckCard" destination="g4g-bk-hJB" id="YE6-ZP-N4s"/>
+                        <outlet property="deckCard0" destination="g4g-bk-hJB" id="uKX-9S-k9Q"/>
+                        <outlet property="deckCard1" destination="oHv-Th-3B0" id="yfB-YX-Uwm"/>
+                        <outlet property="deckCard2" destination="5Qo-l3-Zje" id="sqO-sv-KM7"/>
                         <outlet property="deckCardParentView" destination="bXQ-Cx-qhO" id="dB0-qg-ZKA"/>
+                        <outlet property="dummyCard" destination="dz1-jp-qfR" id="BaN-QH-OBH"/>
                         <outlet property="replaceIcon" destination="R2k-qm-z90" id="I6u-FM-Mpe"/>
                         <outlet property="suggestedCard0" destination="Cix-3v-lTb" id="eyV-HO-DM1"/>
                         <outlet property="suggestedCard1" destination="53F-Ag-bum" id="Lv4-aJ-pSw"/>
                         <outlet property="suggestedCard2" destination="TP1-c6-BC3" id="y5B-vm-qYm"/>
                         <outlet property="suggestedCard3" destination="YC3-fS-vbU" id="KsG-7q-k7e"/>
+                        <outlet property="suggestedCardB0" destination="s9z-S5-9iP" id="u5D-a7-VQL"/>
+                        <outlet property="suggestedCardB1" destination="7Tm-vS-qx9" id="avD-kr-pZm"/>
+                        <outlet property="suggestedCardB2" destination="qbX-Ha-SNK" id="rsL-Vz-qpU"/>
+                        <outlet property="suggestedCardB3" destination="1KH-zb-NM2" id="r6N-aC-3TO"/>
+                        <outlet property="suggestedCardC0" destination="1NN-tZ-jtL" id="4k3-d9-C4Y"/>
+                        <outlet property="suggestedCardC1" destination="AlK-3Y-Gi4" id="UVR-vh-x0R"/>
+                        <outlet property="suggestedCardC2" destination="MCC-mB-Nyo" id="pV6-ej-iRC"/>
+                        <outlet property="suggestedCardC3" destination="94J-2y-eqJ" id="hqb-kU-4LD"/>
                         <outlet property="suggestedCardParentView" destination="EvA-1E-mTz" id="2j3-C4-7NA"/>
                         <outlet property="suggestedCardTray" destination="lTU-Da-KpZ" id="tjl-Tw-3f4"/>
                     </connections>
@@ -156,12 +203,21 @@
         <image name="deck_card1_language" width="352" height="307"/>
         <image name="deck_card2_cultural" width="352" height="307"/>
         <image name="deck_card3_blank" width="352" height="306"/>
+        <image name="dummy_card" width="355" height="306"/>
         <image name="replace_symbol" width="139" height="163"/>
         <image name="suggested_card_tray" width="389" height="501"/>
         <image name="suggestion_group1_card1" width="352" height="342"/>
         <image name="suggestion_group1_card2" width="352" height="342"/>
         <image name="suggestion_group1_card3" width="352" height="342"/>
         <image name="suggestion_group1_card4" width="352" height="342"/>
+        <image name="suggestion_group2_card1" width="350" height="342"/>
+        <image name="suggestion_group2_card2" width="352" height="342"/>
+        <image name="suggestion_group2_card3" width="351" height="342"/>
+        <image name="suggestion_group2_card4" width="351" height="342"/>
+        <image name="suggestion_group3_card1" width="350" height="342"/>
+        <image name="suggestion_group3_card2" width="352" height="342"/>
+        <image name="suggestion_group3_card3" width="351" height="342"/>
+        <image name="suggestion_group3_card4" width="351" height="342"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
