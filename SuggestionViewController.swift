@@ -16,8 +16,7 @@ class SuggestionViewController: UIViewController {
     @IBOutlet weak var replaceIcon: UIImageView!
     @IBOutlet weak var dummyCard: UIImageView!
     
-    // outlets for all suggested cards
-    
+    //// Outlets for all suggested cards ////
     
     // Suggestion Group 0
     @IBOutlet weak var suggestedCardB0: UIImageView!
@@ -25,15 +24,12 @@ class SuggestionViewController: UIViewController {
     @IBOutlet weak var suggestedCardB2: UIImageView!
     @IBOutlet weak var suggestedCardB3: UIImageView!
     
-    
     // Suggestion Group 1
     @IBOutlet weak var suggestedCard0: UIImageView!
     @IBOutlet weak var suggestedCard1: UIImageView!
     @IBOutlet weak var suggestedCard2: UIImageView!
     @IBOutlet weak var suggestedCard3: UIImageView!
-    
 
-    
     // Suggestion Group 2
     @IBOutlet weak var suggestedCardC0: UIImageView!
     @IBOutlet weak var suggestedCardC1: UIImageView!
@@ -41,12 +37,25 @@ class SuggestionViewController: UIViewController {
     @IBOutlet weak var suggestedCardC3: UIImageView!
     
     
-    
-    // outlets for all deck cards
+    //// Outlets for deck cards ////
     
     @IBOutlet weak var deckCard0: UIImageView!
     @IBOutlet weak var deckCard1: UIImageView!
     @IBOutlet weak var deckCard2: UIImageView!
+    
+    
+    //// Outlets for suggested terms area ////
+    
+    @IBOutlet weak var suggestedTermsScrollView: UIScrollView!
+    
+    @IBOutlet weak var suggestedTerms0: UIImageView!
+    @IBOutlet weak var suggestedTerms1: UIImageView!
+    @IBOutlet weak var suggestedTerms2: UIImageView!
+    
+    var suggestedTermsArray: [UIImageView]!
+    var suggestedTermsArrayIndex: Int!
+    var currentSuggestedTerms: UIImageView!
+    var suggestedScrollOriginalX: CGFloat!
     
     
     
@@ -96,9 +105,7 @@ class SuggestionViewController: UIViewController {
     var currentSuggestionArray: [UIImageView]! // displays the current suggestions
     
     // establish concept of a "current deck card" in the deck area
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -153,11 +160,30 @@ class SuggestionViewController: UIViewController {
             }
         }
         
-        
         print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
         print ("suggestedParentOriginalX = \(suggestedParentOriginalX)")
         
-    }
+        
+        
+        // Suggested Terms: Set up array and define 'current'.
+        
+        suggestedTermsArray = [suggestedTerms0, suggestedTerms1, suggestedTerms2]
+        suggestedTermsArrayIndex = 1
+        currentSuggestedTerms = suggestedTermsArray[suggestedTermsArrayIndex]
+        
+        suggestedTermsScrollView.contentSize = currentSuggestedTerms.frame.size
+        suggestedScrollOriginalX = suggestedTermsScrollView.center.x
+        
+        // Hide all suggested term groups except for the first.
+        for terms in suggestedTermsArray {
+            if terms != suggestedTermsArray[1] {
+                terms.isHidden = true
+            }
+        }
+        
+    } // end viewDidLoad
+    
+    
     
     /////////////////////////////////
     ///// Suggested Card Parent//////
@@ -428,6 +454,7 @@ class SuggestionViewController: UIViewController {
         let translation = sender.translation(in: view)
         
         let previousSuggestionArray: [UIImageView]!
+        let previousSuggestedTerms: UIImageView!
         
         if sender.state == .began {
             
@@ -450,7 +477,7 @@ class SuggestionViewController: UIViewController {
                     self.deckCardParentView.center.x = self.deckParentOriginalX + (self.currentDeckCard.frame.width + 2)
                 })
                 
-                ////// 'Load' new suggestions //////
+                ////// 'Load' new suggestions and terms //////
                 
                 // reference the array that has been showing so far
                 previousSuggestionArray = currentSuggestionArray
@@ -462,11 +489,21 @@ class SuggestionViewController: UIViewController {
                 // load the new suggestions
                 showNewSuggestionArray(previousSuggestionArray: previousSuggestionArray, newSuggestionArray: currentSuggestionArray)
                 
+                print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
+                
+                
                 // reset what the 'current' suggested card is
                 resetSuggestionsToBeginning()
                 
-                print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
+                // load new terms
+                previousSuggestedTerms = currentSuggestedTerms
                 
+                suggestedTermsArrayIndex = suggestedTermsArrayIndex - 1
+                currentSuggestedTerms = suggestedTermsArray[suggestedTermsArrayIndex]
+                showNewSuggestedTerms(previousSuggestedTerms: previousSuggestedTerms, newSuggestedTerms: currentSuggestedTerms)
+                
+                print ("suggestedTermsArrayIndex = \(suggestedTermsArrayIndex)")
+
             } else if didPanHalfWayLeft! {
                 
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: {
@@ -485,10 +522,20 @@ class SuggestionViewController: UIViewController {
                 // load the new suggestions
                 showNewSuggestionArray(previousSuggestionArray: previousSuggestionArray, newSuggestionArray: currentSuggestionArray)
                 
+                print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
+                
                 // reset what the 'current' suggested card is
                 resetSuggestionsToBeginning()
                 
-                print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
+                // load new terms
+                previousSuggestedTerms = currentSuggestedTerms
+                
+                suggestedTermsArrayIndex = suggestedTermsArrayIndex + 1
+                currentSuggestedTerms = suggestedTermsArray[suggestedTermsArrayIndex]
+                showNewSuggestedTerms(previousSuggestedTerms: previousSuggestedTerms, newSuggestedTerms: currentSuggestedTerms)
+                
+                print ("suggestedTermsArrayIndex = \(suggestedTermsArrayIndex)")
+                
                 
             } else {
                 
@@ -498,7 +545,7 @@ class SuggestionViewController: UIViewController {
                 })
             }
         }
-    }
+    } // end didPanDeck
     
     
     ///////////////////////////////
@@ -513,17 +560,14 @@ class SuggestionViewController: UIViewController {
         
         dummyCard.isHidden = false
         
-        run(after: 0.9, closure:{
-        
+        run(after: 0.7, closure:{
             self.dummyCard.isHidden = true
             for card in newSuggestionArray {
                 card.isHidden = false
             }
-            
-        }
-        )
-        
-    }
+        })
+    } // end showNewSuggestionArray
+    
 
     func resetSuggestionsToBeginning() {
     
@@ -536,10 +580,23 @@ class SuggestionViewController: UIViewController {
         print ("suggestedCardParentView.center.x should be: \(permanentSuggestedParentOriginalX)")
         print ("suggestedCardParentView.center.x is actually: \(suggestedCardParentView.center.x)")
         
+    } // end resetSuggestionsToBeginning
+    
+    
+    func showNewSuggestedTerms(previousSuggestedTerms: UIImageView, newSuggestedTerms: UIImageView) {
+        
+        suggestedTermsScrollView.center.x = suggestedScrollOriginalX
+        suggestedTermsScrollView.contentSize = currentSuggestedTerms.frame.size
+        
+        previousSuggestedTerms.isHidden = true
+        
+        run(after: 0.7, closure:{
+            newSuggestedTerms.isHidden = false
+        })
+        
+        
+        
     }
-    
-    
-    
     
     
     

@@ -130,6 +130,24 @@
                                 <rect key="frame" x="10" y="262" width="355" height="306"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="zM6-MS-n3W">
+                                <rect key="frame" x="0.0" y="539" width="374" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_terms_amazonian" id="eUa-hZ-F2N">
+                                        <rect key="frame" x="29" y="75" width="729" height="14"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_terms_cultural_anthropology" id="OhE-pe-o5P">
+                                        <rect key="frame" x="29" y="75" width="624" height="14"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_terms_linguistic" id="u8Y-V4-gHX">
+                                        <rect key="frame" x="29" y="75" width="703" height="14"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -156,6 +174,10 @@
                         <outlet property="suggestedCardC3" destination="94J-2y-eqJ" id="hqb-kU-4LD"/>
                         <outlet property="suggestedCardParentView" destination="EvA-1E-mTz" id="2j3-C4-7NA"/>
                         <outlet property="suggestedCardTray" destination="lTU-Da-KpZ" id="tjl-Tw-3f4"/>
+                        <outlet property="suggestedTerms0" destination="u8Y-V4-gHX" id="U94-Y7-1VO"/>
+                        <outlet property="suggestedTerms1" destination="OhE-pe-o5P" id="V3B-qo-WbV"/>
+                        <outlet property="suggestedTerms2" destination="eUa-hZ-F2N" id="mru-Tr-d7V"/>
+                        <outlet property="suggestedTermsScrollView" destination="zM6-MS-n3W" id="t7U-xz-yMm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -206,6 +228,9 @@
         <image name="dummy_card" width="355" height="306"/>
         <image name="replace_symbol" width="139" height="163"/>
         <image name="suggested_card_tray" width="389" height="501"/>
+        <image name="suggested_terms_amazonian" width="729" height="14"/>
+        <image name="suggested_terms_cultural_anthropology" width="624" height="14"/>
+        <image name="suggested_terms_linguistic" width="703" height="14"/>
         <image name="suggestion_group1_card1" width="352" height="342"/>
         <image name="suggestion_group1_card2" width="352" height="342"/>
         <image name="suggestion_group1_card3" width="352" height="342"/>
