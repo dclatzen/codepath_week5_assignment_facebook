@@ -53,10 +53,23 @@ class SuggestionViewController: UIViewController {
     // deck cards
     var deckParentOriginalX: CGFloat!
     
-    // establish the concept of a "current card" in suggestions
-    var currentCard: UIImageView!
-    var currentCardIndex: Int!
-    var suggestedCards: [UIImageView]!
+    // establish the concept of a "current suggested card" in suggestions
+    var currentSuggestedCard: UIImageView!
+    
+    var suggestions1: [UIImageView]! // suggestions based on first card
+    var suggestions2: [UIImageView]! // suggestions based on second card
+    var suggestions3: [UIImageView]! // suggestions based on third card
+    
+    var currentSuggestedCardIndex: Int!
+    var currentSuggestionArrayIndex: Int!
+    var allSuggestionArrays: [[UIImageView]]! // a parent array containing each suggestion array
+    var currentSuggestionArray: [UIImageView]! // displays the current suggestions
+    
+    // establish concept of a "current deck card" in the deck area
+    var currentDeckCard: UIImageView!
+    var currentDeckCardIndex: Int!
+    var deckCards: [UIImageView]!
+    
     
     
     override func viewDidLoad() {
@@ -67,13 +80,23 @@ class SuggestionViewController: UIViewController {
         
         replaceIcon.alpha = 0
         
-        // populate [suggestedCards] with all the cards. set up currentCard
-        suggestedCards = [suggestedCard0, suggestedCard1, suggestedCard2, suggestedCard3]
+        //// Populate arrays. Initialize 'current_____' variables////
         
-        currentCardIndex = 0
-        currentCard = suggestedCards[currentCardIndex]
+        // Set up all of my potential groups of suggested cards
         
-        print("Print is working.")
+        suggestions1 = [suggestedCard0, suggestedCard1, suggestedCard2, suggestedCard3]
+        
+        // Set up a way reference these arrays in the future when I want to quickly switch between them
+        
+        allSuggestionArrays = [suggestions1]
+        
+        // What will I use to actually display the chosen group of suggested cards, and the one card that the viewer should be seeing?
+        
+        currentSuggestionArrayIndex = 0
+        currentSuggestedCardIndex = 0
+        
+        currentSuggestionArray = allSuggestionArrays[currentSuggestionArrayIndex]
+        currentSuggestedCard = currentSuggestionArray[currentSuggestedCardIndex]
         
     }
     
@@ -86,7 +109,7 @@ class SuggestionViewController: UIViewController {
         let translation = sender.translation(in: view)
         
         // half of a card's width, plus half the gap between cards
-        halfWay = ((currentCard.frame.width + 10) / 2)
+        halfWay = ((currentSuggestedCard.frame.width + 10) / 2)
         
         didPanHalfWayRight = Double(translation.x) > Double(halfWay)
         didPanHalfWayLeft = translation.x < 0 && translation.x < -halfWay
@@ -105,21 +128,24 @@ class SuggestionViewController: UIViewController {
                 
                 // if the user panned more than halfway to the next card, advance to the next card
                 if self.didPanHalfWayLeft! {
-                    self.suggestedCardParentView.center.x = self.suggestedParentOriginalX - (self.currentCard.frame.width + 2)
-                    self.currentCardIndex = self.currentCardIndex + 1
-                    self.currentCard = self.suggestedCards[self.currentCardIndex]
+                    self.suggestedCardParentView.center.x = self.suggestedParentOriginalX - (self.currentSuggestedCard.frame.width + 2)
+                    
+                    // Re-set the current card, and its center
+                    self.currentSuggestedCardIndex = self.currentSuggestedCardIndex + 1
+                    self.currentSuggestedCard = self.currentSuggestionArray[self.currentSuggestedCardIndex]
                     
                     print ("Did pan halfway left.")
-                    print("currentCardIndex: \(self.currentCardIndex)")
+                    print("currentSuggestedCardIndex: \(self.currentSuggestedCardIndex)")
                     
                 } else if self.didPanHalfWayRight! {
-                    self.suggestedCardParentView.center.x = self.suggestedParentOriginalX + (self.currentCard.frame.width + 2)
+                    self.suggestedCardParentView.center.x = self.suggestedParentOriginalX + (self.currentSuggestedCard.frame.width + 2)
                     
-                    self.currentCardIndex = self.currentCardIndex - 1
-                    self.currentCard = self.suggestedCards[self.currentCardIndex]
+                    // Re-set the current card, and its center
+                    self.currentSuggestedCardIndex = self.currentSuggestedCardIndex - 1
+                    self.currentSuggestedCard = self.currentSuggestionArray[self.currentSuggestedCardIndex]
                     
                     print("Did pan halfway right")
-                    print("currentCardIndex: \(self.currentCardIndex)")
+                    print("currentSuggestedCardIndex: \(self.currentSuggestedCardIndex)")
                 }
                     
                 // otherwise snap the current card back to center
@@ -239,12 +265,12 @@ class SuggestionViewController: UIViewController {
             print ("'duplicatedCard.center = imageView.center' completed. center.y: \(duplicatedCard.center.y)")
             
             // center the new card
-            duplicatedCard.center.y += currentCard.center.y - 9
-            duplicatedCard.center.x -= (currentCard.frame.width + 2) * CGFloat(currentCardIndex)
+            duplicatedCard.center.y += currentSuggestedCard.center.y - 9
+            duplicatedCard.center.x -= (currentSuggestedCard.frame.width + 2) * CGFloat(currentSuggestedCardIndex)
             
             
-            print ("duplicatedCard.center + currentCard.center.y = \(duplicatedCard.center.y) + \(currentCard.center.y) = \(duplicatedCard.center.y + currentCard.center.y)")
-            print ("duplicatedCard.center.y should = \(duplicatedCard.center.y + currentCard.center.y)")
+            print ("duplicatedCard.center + currentSuggestedCard.center.y = \(duplicatedCard.center.y) + \(currentSuggestedCard.center.y) = \(duplicatedCard.center.y + currentSuggestedCard.center.y)")
+            print ("duplicatedCard.center.y should = \(duplicatedCard.center.y + currentSuggestedCard.center.y)")
             print ("duplicatedCard.center.y actually = \(duplicatedCard.center.y)")
             
             
@@ -252,7 +278,7 @@ class SuggestionViewController: UIViewController {
             duplicatedCardOriginalCenter = duplicatedCard.center
             
             // hide the suggested card, giving the impression that the duplicate card is the suggested card
-            self.currentCard.isHidden = true
+            self.currentSuggestedCard.isHidden = true
             
             print ("Duplicate card center.x: \(duplicatedCard.center.x)")
             
@@ -264,7 +290,7 @@ class SuggestionViewController: UIViewController {
             
             duplicatedCard.center = CGPoint(x: duplicatedCardOriginalCenter.x + translation.x, y: duplicatedCardOriginalCenter.y + translation.y)
             
-            /////// Dragging Replace or Add a Deck Card ///////
+            /////// Dragging: Replace or Add a Deck Card ///////
             
             replacingDeckCard = duplicatedCard.center.x > 75 && duplicatedCard.center.x < 350 && duplicatedCard.center.y < 350
             
@@ -315,7 +341,7 @@ class SuggestionViewController: UIViewController {
             // Do these after release, with a delay
             delay(0.3, closure: {
                 self.duplicatedCard.removeFromSuperview()
-                self.currentCard.isHidden = false
+                self.currentSuggestedCard.isHidden = false
             })
             
             
@@ -329,6 +355,7 @@ class SuggestionViewController: UIViewController {
         
         
     } // end didDragSuggestion
+    
     
     ///////////////////////////////
     /////// User Deck Cards ///////
