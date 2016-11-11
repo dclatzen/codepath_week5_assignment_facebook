@@ -16,6 +16,7 @@ class SuggestionViewController: UIViewController {
     @IBOutlet weak var replaceIcon: UIImageView!
     @IBOutlet weak var dummyCard: UIImageView!
     @IBOutlet weak var trayArrow: UIImageView!
+    @IBOutlet weak var editorToolbar: UIImageView!
     
     //// Outlets for all suggested cards ////
     
@@ -120,9 +121,11 @@ class SuggestionViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         
+        // Alpha states
         replaceIcon.alpha = 0
         dummyCard.alpha = 0
         suggestedTermsEthnology.alpha = 0
+        editorToolbar.alpha = 0
         
         // Tray and suggestion positioning
         
@@ -135,7 +138,7 @@ class SuggestionViewController: UIViewController {
         suggestedTrayUp = 200
         suggestedTrayDown = suggestedTrayUp + suggestionOffset
         
-        suggestedParentUp = 226
+        suggestedParentUp = 231
         suggestedParentDown = suggestedParentUp + suggestionOffset
         
         arrowOriginalY = trayArrow.center.y
@@ -291,6 +294,7 @@ class SuggestionViewController: UIViewController {
         let velocity = sender.velocity(in: view)
         let translation = sender.translation(in: view)
         let isMovingDown = velocity.y > 0
+        var show: Bool!
         
         if sender.state == .began {
             
@@ -308,6 +312,8 @@ class SuggestionViewController: UIViewController {
             
         } else if sender.state == .ended {
             
+            var alpha: CGFloat!
+            
             if isMovingDown {
                 
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: {
@@ -316,10 +322,12 @@ class SuggestionViewController: UIViewController {
                     self.suggestedTermsScrollView.center.y = self.suggestedScrollOriginalY + 300
                     self.trayArrow.center.y = self.arrowDown
                     self.trayArrow.transform = CGAffineTransform(rotationAngleDegrees: 180)
+                    alpha = 1
                 })
                 
+                toggleToolbar(alpha: alpha)
                 
-            } else {
+            } else { // moving up
                 
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: {
                     self.suggestedCardTray.frame.origin.y = self.suggestedTrayUp
@@ -327,11 +335,16 @@ class SuggestionViewController: UIViewController {
                     self.suggestedTermsScrollView.center.y = self.suggestedScrollOriginalY
                     self.trayArrow.center.y = self.arrowUp
                     self.trayArrow.transform = CGAffineTransform(rotationAngleDegrees: 0)
+                    alpha = 0
                 })
+
+                toggleToolbar(alpha: alpha)
+                
             }
+
+            
         }
     } // end didPanTray
-    
     
     ////////////////////////////////////////
     /////// Dragging Suggested Cards ///////
@@ -615,7 +628,7 @@ class SuggestionViewController: UIViewController {
         print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
         print (" ")
         
-        // Dismiss the special case if applicable (user tapped "ethnology" suggested term)
+        // Dismiss the special case if applicable (user tapped the "ethnology" suggested term)
         if suggestedTermsEthnology.alpha > 0 {
             
             // hide ethnology suggested terms
@@ -664,11 +677,8 @@ class SuggestionViewController: UIViewController {
                         self.dummyCard.alpha = 0
                         print ("SHOW dummyCard: dummyCard.alpha = \(self.dummyCard.alpha)")
                     })
-                    
             })
-        
     
-        
 } // end showNewSuggestionArray
 
 
@@ -716,5 +726,26 @@ class SuggestionViewController: UIViewController {
     } // end showNewSuggestedTerms
     
     
+    func toggleToolbar (alpha: CGFloat) {
+        
+        print ("Running toggleToolbar")
+        
+        if alpha == 1 {
+            UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations:{
+                self.editorToolbar.alpha = 1
+            })
+            
+        } else {
+            UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations:{
+                
+                self.editorToolbar.alpha = 0
+                
+            })
+        }
+    } // end toggleToolbar
     
-}
+    
+    
+    
+    
+} // END CLASS
