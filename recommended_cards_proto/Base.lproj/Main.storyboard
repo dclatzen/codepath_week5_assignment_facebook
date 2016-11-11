@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1436" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="bXQ-Cx-qhO" userLabel="Deck card parent view">
-                                <rect key="frame" x="0.0" y="0.0" width="1082" height="346"/>
+                            <view contentMode="scaleToFill" misplaced="YES" id="bXQ-Cx-qhO" userLabel="Deck card parent view">
+                                <rect key="frame" x="0.0" y="39" width="1082" height="346"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="deck_card1_language" id="g4g-bk-hJB" userLabel="Deck Card0">
@@ -33,10 +33,6 @@
                                         <rect key="frame" x="719" y="21" width="352" height="306"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="replace_symbol" id="R2k-qm-z90">
-                                        <rect key="frame" x="118" y="31" width="139" height="163"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -44,44 +40,56 @@
                                     <outletCollection property="gestureRecognizers" destination="oGF-2O-bwe" appends="YES" id="I4z-1m-kk1"/>
                                 </connections>
                             </view>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggested_card_tray" id="lTU-Da-KpZ">
-                                <rect key="frame" x="-8" y="176" width="389" height="501"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="replace_symbol" id="R2k-qm-z90">
+                                <rect key="frame" x="117" y="57" width="139" height="163"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_card_tray" id="lTU-Da-KpZ">
+                                <rect key="frame" x="-8" y="200" width="389" height="501"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="zCg-pG-QAb" appends="YES" id="7lh-ha-Mul"/>
                                 </connections>
                             </imageView>
-                            <view contentMode="scaleToFill" id="EvA-1E-mTz">
-                                <rect key="frame" x="0.0" y="202" width="1440" height="465"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="recommended_cards_arrow" id="nDj-n1-Jtc">
+                                <rect key="frame" x="175" y="213" width="23" height="14"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="zUK-AG-T5n" appends="YES" id="Fay-NM-gGE"/>
+                                </connections>
+                            </imageView>
+                            <view contentMode="scaleToFill" misplaced="YES" id="EvA-1E-mTz">
+                                <rect key="frame" x="0.0" y="231" width="1440" height="380"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group1_card2" id="Cix-3v-lTb" userLabel="Suggested Card0">
-                                        <rect key="frame" x="11" y="40" width="352" height="342"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group1_card2" id="Cix-3v-lTb" userLabel="Suggested Card0">
+                                        <rect key="frame" x="11" y="25" width="352" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="gRJ-Ea-T7H" appends="YES" id="ECg-4S-Mb8"/>
                                         </connections>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group1_card1" id="53F-Ag-bum">
-                                        <rect key="frame" x="365" y="40" width="352" height="342"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group1_card1" id="53F-Ag-bum">
+                                        <rect key="frame" x="365" y="25" width="352" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="sRR-O3-U7r" appends="YES" id="PMM-Ph-tcb"/>
                                         </connections>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group1_card3" id="TP1-c6-BC3">
-                                        <rect key="frame" x="719" y="40" width="352" height="342"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group1_card3" id="TP1-c6-BC3">
+                                        <rect key="frame" x="719" y="25" width="352" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="btL-9h-jtQ" appends="YES" id="XMk-rf-sK4"/>
                                         </connections>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group1_card4" id="YC3-fS-vbU">
-                                        <rect key="frame" x="1073" y="40" width="352" height="342"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group1_card4" id="YC3-fS-vbU">
+                                        <rect key="frame" x="1073" y="25" width="352" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <gestureRecognizers/>
                                         <connections>
@@ -89,35 +97,39 @@
                                         </connections>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group2_card1" id="s9z-S5-9iP">
-                                        <rect key="frame" x="12" y="40" width="350" height="342"/>
+                                        <rect key="frame" x="12" y="25" width="350" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group2_card2" id="7Tm-vS-qx9">
-                                        <rect key="frame" x="364" y="40" width="352" height="342"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group2_card2" id="7Tm-vS-qx9">
+                                        <rect key="frame" x="364" y="25" width="352" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group2_card3" id="qbX-Ha-SNK">
-                                        <rect key="frame" x="719" y="39" width="351" height="342"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group2_card3" id="qbX-Ha-SNK">
+                                        <rect key="frame" x="719" y="24" width="351" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group2_card4" id="1KH-zb-NM2">
-                                        <rect key="frame" x="1074" y="40" width="351" height="342"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group2_card4" id="1KH-zb-NM2">
+                                        <rect key="frame" x="1074" y="25" width="351" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group3_card1" id="1NN-tZ-jtL">
-                                        <rect key="frame" x="11" y="40" width="350" height="342"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group3_card1" id="1NN-tZ-jtL">
+                                        <rect key="frame" x="11" y="25" width="350" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group3_card2" id="AlK-3Y-Gi4">
-                                        <rect key="frame" x="364" y="40" width="352" height="342"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group3_card2" id="AlK-3Y-Gi4">
+                                        <rect key="frame" x="364" y="25" width="352" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group3_card3" id="MCC-mB-Nyo">
-                                        <rect key="frame" x="719" y="39" width="351" height="342"/>
+                                        <rect key="frame" x="719" y="24" width="351" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="suggestion_group3_card4" id="94J-2y-eqJ">
-                                        <rect key="frame" x="1073" y="40" width="351" height="342"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group3_card4" id="94J-2y-eqJ">
+                                        <rect key="frame" x="1073" y="25" width="351" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggestion_group4_card1of1@2x copy" id="qI6-sH-gpJ">
+                                        <rect key="frame" x="11" y="25" width="350" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                 </subviews>
@@ -127,11 +139,11 @@
                                 </connections>
                             </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="dummy_card" id="dz1-jp-qfR">
-                                <rect key="frame" x="10" y="262" width="355" height="306"/>
+                                <rect key="frame" x="9" y="256" width="355" height="351"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="zM6-MS-n3W">
-                                <rect key="frame" x="0.0" y="539" width="374" height="128"/>
+                                <rect key="frame" x="0.0" y="551" width="374" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_terms_amazonian" id="eUa-hZ-F2N">
@@ -142,12 +154,42 @@
                                         <rect key="frame" x="29" y="75" width="624" height="14"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="6GN-D4-FNe">
+                                        <rect key="frame" x="39" y="105" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </scrollView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="5Ws-oz-pqa">
+                                        <rect key="frame" x="49" y="115" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </scrollView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_terms_linguistic" id="u8Y-V4-gHX">
                                         <rect key="frame" x="29" y="75" width="703" height="14"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_terms_ethnology" id="wBo-2U-Uqg">
+                                        <rect key="frame" x="29" y="75" width="618" height="14"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="N3j-g7-L6p">
+                                        <rect key="frame" x="336" y="67" width="68" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="didTapEthnologyTerm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ynv-5M-XR1"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="nav1_editor" id="mc5-x0-XhF">
+                                <rect key="frame" x="17" y="30" width="340" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="pGv-Me-cl4">
+                                <rect key="frame" x="251" y="67" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -172,12 +214,15 @@
                         <outlet property="suggestedCardC1" destination="AlK-3Y-Gi4" id="UVR-vh-x0R"/>
                         <outlet property="suggestedCardC2" destination="MCC-mB-Nyo" id="pV6-ej-iRC"/>
                         <outlet property="suggestedCardC3" destination="94J-2y-eqJ" id="hqb-kU-4LD"/>
+                        <outlet property="suggestedCardD1" destination="qI6-sH-gpJ" id="5nH-bD-ruC"/>
                         <outlet property="suggestedCardParentView" destination="EvA-1E-mTz" id="2j3-C4-7NA"/>
                         <outlet property="suggestedCardTray" destination="lTU-Da-KpZ" id="tjl-Tw-3f4"/>
                         <outlet property="suggestedTerms0" destination="u8Y-V4-gHX" id="U94-Y7-1VO"/>
                         <outlet property="suggestedTerms1" destination="OhE-pe-o5P" id="V3B-qo-WbV"/>
                         <outlet property="suggestedTerms2" destination="eUa-hZ-F2N" id="mru-Tr-d7V"/>
+                        <outlet property="suggestedTermsEthnology" destination="wBo-2U-Uqg" id="TX2-4X-vFY"/>
                         <outlet property="suggestedTermsScrollView" destination="zM6-MS-n3W" id="t7U-xz-yMm"/>
+                        <outlet property="trayArrow" destination="nDj-n1-Jtc" id="7sg-xe-nJb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -217,6 +262,11 @@
                     </connections>
                 </panGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="UhN-bG-L5B"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="zUK-AG-T5n" userLabel="Tray Arrow Pan Gesture Recognizer">
+                    <connections>
+                        <action selector="didPanTray:" destination="BYZ-38-t0r" id="ac3-iX-Bb7"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="22" y="41.5"/>
         </scene>
@@ -225,11 +275,14 @@
         <image name="deck_card1_language" width="352" height="307"/>
         <image name="deck_card2_cultural" width="352" height="307"/>
         <image name="deck_card3_blank" width="352" height="306"/>
-        <image name="dummy_card" width="355" height="306"/>
+        <image name="dummy_card" width="355" height="349"/>
+        <image name="nav1_editor" width="340" height="16"/>
+        <image name="recommended_cards_arrow" width="23" height="14"/>
         <image name="replace_symbol" width="139" height="163"/>
         <image name="suggested_card_tray" width="389" height="501"/>
         <image name="suggested_terms_amazonian" width="729" height="14"/>
         <image name="suggested_terms_cultural_anthropology" width="624" height="14"/>
+        <image name="suggested_terms_ethnology" width="618" height="14"/>
         <image name="suggested_terms_linguistic" width="703" height="14"/>
         <image name="suggestion_group1_card1" width="352" height="342"/>
         <image name="suggestion_group1_card2" width="352" height="342"/>
@@ -243,6 +296,7 @@
         <image name="suggestion_group3_card2" width="352" height="342"/>
         <image name="suggestion_group3_card3" width="351" height="342"/>
         <image name="suggestion_group3_card4" width="351" height="342"/>
+        <image name="suggestion_group4_card1of1@2x copy" width="350" height="342"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

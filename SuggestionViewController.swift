@@ -15,6 +15,7 @@ class SuggestionViewController: UIViewController {
     @IBOutlet weak var deckCardParentView: UIView!
     @IBOutlet weak var replaceIcon: UIImageView!
     @IBOutlet weak var dummyCard: UIImageView!
+    @IBOutlet weak var trayArrow: UIImageView!
     
     //// Outlets for all suggested cards ////
     
@@ -36,6 +37,9 @@ class SuggestionViewController: UIViewController {
     @IBOutlet weak var suggestedCardC2: UIImageView!
     @IBOutlet weak var suggestedCardC3: UIImageView!
     
+    // Suggestion starter card for the blank deck card. Need this to differentiate that group of suggestions.
+    @IBOutlet weak var suggestedCardD1: UIImageView!
+    
     
     //// Outlets for deck cards ////
     
@@ -51,12 +55,13 @@ class SuggestionViewController: UIViewController {
     @IBOutlet weak var suggestedTerms0: UIImageView!
     @IBOutlet weak var suggestedTerms1: UIImageView!
     @IBOutlet weak var suggestedTerms2: UIImageView!
+    @IBOutlet weak var suggestedTermsEthnology: UIImageView!
     
     var suggestedTermsArray: [UIImageView]!
     var suggestedTermsArrayIndex: Int!
     var currentSuggestedTerms: UIImageView!
     var suggestedScrollOriginalX: CGFloat!
-    
+    var suggestedScrollOriginalY: CGFloat!
     
     
     // set up initial positions of the suggestion parent
@@ -69,6 +74,9 @@ class SuggestionViewController: UIViewController {
     var suggestedTrayUp: CGFloat!
     var suggestedTrayDown: CGFloat!
     var suggestionOffset: CGFloat!
+    var arrowOriginalY: CGFloat!
+    var arrowUp: CGFloat!
+    var arrowDown: CGFloat!
     
     // move the suggestions simultaneously with with the tray
     var suggestedParentUp: CGFloat!
@@ -95,9 +103,10 @@ class SuggestionViewController: UIViewController {
     // Suggestion variables
     var currentSuggestedCard: UIImageView!
     
-    var suggestions0: [UIImageView]! // suggestions based on second card
-    var suggestions1: [UIImageView]! // suggestions based on first card
-    var suggestions2: [UIImageView]! // suggestions based on third card
+    var suggestions0: [UIImageView]! // suggestions based on position 0
+    var suggestions1: [UIImageView]! // suggestions based on position 1
+    var suggestions2: [UIImageView]! // suggestions based on position 2
+    var suggestionsEthnology: [UIImageView]! // suggestions based on a user tapping "ethnology"
     
     var currentSuggestedCardIndex: Int!
     var currentSuggestionArrayIndex: Int!
@@ -110,11 +119,30 @@ class SuggestionViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        replaceIcon.alpha = 0
+        dummyCard.alpha = 0
+        suggestedTermsEthnology.alpha = 0
+        
+        // Tray and suggestion positioning
+        
+        // offset = keyboard height
+        suggestionOffset = 181
+        
+        arrowUp = 218
+        arrowDown = arrowUp + suggestionOffset
+        
+        suggestedTrayUp = 200
+        suggestedTrayDown = suggestedTrayUp + suggestionOffset
+        
+        suggestedParentUp = 226
+        suggestedParentDown = suggestedParentUp + suggestionOffset
+        
+        arrowOriginalY = trayArrow.center.y
         suggestedParentOriginalX = suggestedCardParentView.center.x
         permanentSuggestedParentOriginalX = suggestedParentOriginalX
         
-        replaceIcon.alpha = 0
-        dummyCard.isHidden = true
+        suggestedScrollOriginalY = suggestedTermsScrollView.center.y
         
         
         //// Deck Cards: set up array, define 'current'////
@@ -136,13 +164,15 @@ class SuggestionViewController: UIViewController {
     
         suggestions0 = [suggestedCardB0, suggestedCardB1, suggestedCardB2, suggestedCardB3]
         suggestions1 = [suggestedCard0, suggestedCard1, suggestedCard2, suggestedCard3]
-        suggestions2 = [suggestedCardC0, suggestedCardC1, suggestedCardC2, suggestedCardC3]
+        suggestions2 = [suggestedCardD1, suggestedCard3, suggestedCardB0, suggestedCardC1]
+        
+        suggestionsEthnology = [suggestedCardC0, suggestedCardC1, suggestedCardC2, suggestedCardC3]
         
         // Set up a way reference suggested-card arrays in the future when I want to quickly switch between them
         
         allSuggestionArrays = [suggestions0, suggestions1, suggestions2]
         
-        // What will I use to actually display the chosen group of suggested cards, and the one card that the viewer should be seeing?
+        // Display the chosen group of suggested cards, and the one card that the viewer should be seeing
         
         currentSuggestionArrayIndex = 1
         currentSuggestedCardIndex = 0
@@ -155,9 +185,15 @@ class SuggestionViewController: UIViewController {
             
             if array != allSuggestionArrays[1] {
                 for card in array {
-                    card.isHidden = true
+                    card.alpha = 0
                 }
             }
+        }
+        
+        // Hide the 'ethnology' special case array
+        
+        for card in suggestionsEthnology {
+            card.alpha = 0
         }
         
         print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
@@ -165,7 +201,7 @@ class SuggestionViewController: UIViewController {
         
         
         
-        // Suggested Terms: Set up array and define 'current'.
+        // Suggested Terms: Set up array and define 'current'
         
         suggestedTermsArray = [suggestedTerms0, suggestedTerms1, suggestedTerms2]
         suggestedTermsArrayIndex = 1
@@ -177,7 +213,7 @@ class SuggestionViewController: UIViewController {
         // Hide all suggested term groups except for the first.
         for terms in suggestedTermsArray {
             if terms != suggestedTermsArray[1] {
-                terms.isHidden = true
+                terms.alpha = 0
             }
         }
         
@@ -198,7 +234,6 @@ class SuggestionViewController: UIViewController {
         
         didPanHalfWayRight = Double(translation.x) > Double(halfWay)
         didPanHalfWayLeft = translation.x < 0 && translation.x < -halfWay
-        
         
         if sender.state == .began {
             suggestedParentOriginalX = suggestedCardParentView.center.x
@@ -257,38 +292,19 @@ class SuggestionViewController: UIViewController {
         let translation = sender.translation(in: view)
         let isMovingDown = velocity.y > 0
         
-        // offset = keyboard height
-        suggestionOffset = 216
-        
-        suggestedTrayUp = 176
-        suggestedTrayDown = suggestedTrayUp + suggestionOffset
-        
-        suggestedParentUp = 202
-        suggestedParentDown = suggestedParentUp + suggestionOffset
-        
         if sender.state == .began {
             
             suggestedTrayOriginalY = suggestedCardTray.frame.origin.y
             suggestedParentOriginalY = suggestedCardParentView.frame.origin.y
+            arrowOriginalY = trayArrow.center.y
             
         } else if sender.state == .changed {
             
-            if isMovingDown {
-                
-                suggestedCardTray.frame.origin.y = suggestedTrayOriginalY + translation.y
-                
-                // move suggestions down with the tray
-                suggestedCardParentView.frame.origin.y = suggestedParentOriginalY + translation.y
-                
-                print ("Moving tray down.")
-                print ("suggestedCardParentView.center.y = \(Double(suggestedCardParentView.center.y))")
-                
-            } else {
-                
-                suggestedCardTray.frame.origin.y = suggestedTrayOriginalY + translation.y
-                
-                suggestedCardParentView.frame.origin.y = suggestedParentOriginalY + translation.y
-            }
+            suggestedCardTray.frame.origin.y = suggestedTrayOriginalY + translation.y
+            suggestedCardParentView.frame.origin.y = suggestedParentOriginalY + translation.y
+            suggestedTermsScrollView.center.y = suggestedScrollOriginalY + translation.y
+            trayArrow.center.y = arrowOriginalY + translation.y
+            
             
         } else if sender.state == .ended {
             
@@ -297,7 +313,9 @@ class SuggestionViewController: UIViewController {
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: {
                     self.suggestedCardTray.frame.origin.y = self.suggestedTrayDown
                     self.suggestedCardParentView.frame.origin.y = self.suggestedParentDown
-                    
+                    self.suggestedTermsScrollView.center.y = self.suggestedScrollOriginalY + 300
+                    self.trayArrow.center.y = self.arrowDown
+                    self.trayArrow.transform = CGAffineTransform(rotationAngleDegrees: 180)
                 })
                 
                 
@@ -306,6 +324,9 @@ class SuggestionViewController: UIViewController {
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: {
                     self.suggestedCardTray.frame.origin.y = self.suggestedTrayUp
                     self.suggestedCardParentView.frame.origin.y = self.suggestedParentUp
+                    self.suggestedTermsScrollView.center.y = self.suggestedScrollOriginalY
+                    self.trayArrow.center.y = self.arrowUp
+                    self.trayArrow.transform = CGAffineTransform(rotationAngleDegrees: 0)
                 })
             }
         }
@@ -320,15 +341,6 @@ class SuggestionViewController: UIViewController {
         
         let translation = sender.translation(in: view)
         let velocity = sender.velocity(in: view)
-        
-        // offset = keyboard height
-        suggestionOffset = 216
-        
-        suggestedTrayUp = 176
-        suggestedTrayDown = suggestedTrayUp + suggestionOffset
-        
-        suggestedParentUp = 202
-        suggestedParentDown = suggestedParentUp + suggestionOffset
         
         if sender.state == .began {
             
@@ -352,7 +364,7 @@ class SuggestionViewController: UIViewController {
             print ("'duplicatedCard.center = imageView.center' completed. center.y: \(duplicatedCard.center.y)")
             
             // center the new card
-            duplicatedCard.center.y += currentSuggestedCard.center.y - 9
+            duplicatedCard.center.y += currentSuggestedCard.center.y + 35
             duplicatedCard.center.x -= (currentSuggestedCard.frame.width + 2) * CGFloat(currentSuggestedCardIndex)
             
             
@@ -392,6 +404,7 @@ class SuggestionViewController: UIViewController {
                     self.suggestedCardTray.frame.origin.y = self.suggestedTrayDown
                     self.currentDeckCard.alpha = 0.4
                     self.replaceIcon.alpha = 1
+                    self.trayArrow.center.y = self.arrowDown
                     
                 })
             }
@@ -409,6 +422,7 @@ class SuggestionViewController: UIViewController {
                     self.suggestedCardTray.frame.origin.y = self.suggestedTrayUp
                     self.currentDeckCard.alpha = 1
                     self.replaceIcon.alpha = 0
+                    self.trayArrow.center.y = self.arrowUp
                 })
                 
             }
@@ -423,6 +437,7 @@ class SuggestionViewController: UIViewController {
                 self.suggestedCardTray.frame.origin.y = self.suggestedTrayUp
                 self.currentDeckCard.alpha = 1
                 self.replaceIcon.alpha = 0
+                self.trayArrow.center.y = self.arrowUp
             })
             
             // Do these after release, with a delay
@@ -548,55 +563,157 @@ class SuggestionViewController: UIViewController {
     } // end didPanDeck
     
     
+    
+    @IBAction func didTapEthnologyTerm(_ sender: UIButton) {
+        
+        // Tapping that button triggers a series of events that exist outside of the array structure that handles all other scrolling. It is a special case that is handled here in an isolated way.
+        
+        // hide previous terms, show new ones with 'ethnology' selected
+        currentSuggestedTerms.alpha = 0
+        suggestedTermsEthnology.alpha = 1
+        
+        // hide suggestions that have been showing so far
+        for card in currentSuggestionArray {
+            UIView.animate(withDuration: 0.2, animations: {
+                card.alpha = 0
+            })
+        }
+        
+        // show and hide the dummy card
+        UIView.animate(withDuration: 0.2,
+                       animations: {
+                        self.dummyCard.alpha = 1
+                        
+        }, completion: {complete in
+            UIView.animate(
+                withDuration: 0.2,
+                delay: 0.7,
+                animations: {
+                self.dummyCard.alpha = 0
+            })
+        })
+        
+        
+        for card in suggestionsEthnology {
+            UIView.animate(withDuration: 0.2, animations: {
+                card.alpha = 1
+            })
+
+        }
+        
+    } // end didTapEthnologyTerm
+    
+    
     ///////////////////////////////
     /////// Useful Functions //////
     ///////////////////////////////
     
     func showNewSuggestionArray(previousSuggestionArray: [UIImageView], newSuggestionArray: [UIImageView]) {
         
-        for card in previousSuggestionArray {
-            card.isHidden = true
+        print (" ")
+        print ("running showNewSuggestionArray")
+        print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
+        print (" ")
+        
+        // Dismiss the special case if applicable (user tapped "ethnology" suggested term)
+        if suggestedTermsEthnology.alpha > 0 {
+            
+            // hide ethnology suggested terms
+            UIView.animate(withDuration: 0.2, animations: { 
+                self.suggestedTermsEthnology.alpha = 0
+            })
+            
+            // hide the ethnology suggestions
+            for card in suggestionsEthnology {
+                UIView.animate(withDuration: 0.2, animations: {
+                    card.alpha = 0
+                })
+            }
         }
         
-        dummyCard.isHidden = false
+        // hide suggestions that have been showing so far
         
-        run(after: 0.7, closure:{
-            self.dummyCard.isHidden = true
-            for card in newSuggestionArray {
-                card.isHidden = false
-            }
-        })
-    } // end showNewSuggestionArray
+        let delayForNew: Double!
+        delayForNew = 0.7
+        
+        for card in previousSuggestionArray {
+            UIView.animate(
+                withDuration: 0.2,
+                animations: {
+                    card.alpha = 0
+                    self.dummyCard.alpha = 1
+                    print ("SHOW dummyCard: dummyCard.alpha = \(self.dummyCard.alpha)")
+            })
+        }
+        
+        print ("suggestions0[0].alpha = \(suggestions0[0].alpha)")
+        
+        // show the new suggestions
+            UIView.animate(
+                withDuration: 0.2,
+                delay: delayForNew,
+                animations: {
+                    for card in newSuggestionArray {
+                        card.alpha = 1
+                    }
+            },
+                completion: { complete in
+                    
+                    // hide the dummy card
+                    UIView.animate(withDuration: 0.2, animations: { 
+                        self.dummyCard.alpha = 0
+                        print ("SHOW dummyCard: dummyCard.alpha = \(self.dummyCard.alpha)")
+                    })
+                    
+            })
+        
     
+        
+} // end showNewSuggestionArray
+
 
     func resetSuggestionsToBeginning() {
+        
+        print (" ")
+        print ("running 'resetSuggestionsToBeginning'")
+        print (" ")
     
         currentSuggestedCardIndex = 0
         currentSuggestedCard = currentSuggestionArray[0]
         suggestedCardParentView.center.x = permanentSuggestedParentOriginalX
         
-        print (" ")
         print ("currentSuggestedCardIndex \(currentSuggestedCardIndex)")
-        print ("suggestedCardParentView.center.x should be: \(permanentSuggestedParentOriginalX)")
-        print ("suggestedCardParentView.center.x is actually: \(suggestedCardParentView.center.x)")
         
     } // end resetSuggestionsToBeginning
     
     
     func showNewSuggestedTerms(previousSuggestedTerms: UIImageView, newSuggestedTerms: UIImageView) {
         
+        print (" ")
+        print ("running 'showNewSuggestedTerms'")
+        print (" ")
+        
         suggestedTermsScrollView.center.x = suggestedScrollOriginalX
         suggestedTermsScrollView.contentSize = currentSuggestedTerms.frame.size
         
-        previousSuggestedTerms.isHidden = true
-        
-        run(after: 0.7, closure:{
-            newSuggestedTerms.isHidden = false
+        UIView.animate(
+            withDuration: 0.2,
+            animations:{
+            previousSuggestedTerms.alpha = 0
+        },
+            completion: {complete in
+                
+                UIView.animate(
+                    withDuration: 0.2,
+                    delay: 0.7,
+                    animations: {
+                    newSuggestedTerms.alpha = 1
+                })
+            
         })
         
         
-        
-    }
+    } // end showNewSuggestedTerms
     
     
     
