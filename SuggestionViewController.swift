@@ -17,6 +17,7 @@ class SuggestionViewController: UIViewController {
     @IBOutlet weak var dummyCard: UIImageView!
     @IBOutlet weak var trayArrow: UIImageView!
     @IBOutlet weak var editorToolbar: UIImageView!
+    @IBOutlet weak var textFieldForBlinker: UITextField!
     
     //// Outlets for all suggested cards ////
     
@@ -61,6 +62,7 @@ class SuggestionViewController: UIViewController {
     var suggestedTermsArray: [UIImageView]!
     var suggestedTermsArrayIndex: Int!
     var currentSuggestedTerms: UIImageView!
+    var suggestedTermsOriginalX: CGFloat!
     var suggestedScrollOriginalX: CGFloat!
     var suggestedScrollOriginalY: CGFloat!
     
@@ -121,11 +123,13 @@ class SuggestionViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         
+        textFieldForBlinker.becomeFirstResponder()
+        
         // Alpha states
         replaceIcon.alpha = 0
         dummyCard.alpha = 0
         suggestedTermsEthnology.alpha = 0
-        editorToolbar.alpha = 0
+        editorToolbar.alpha = 1
         
         // Tray and suggestion positioning
         
@@ -134,18 +138,21 @@ class SuggestionViewController: UIViewController {
         
         arrowUp = 218
         arrowDown = arrowUp + suggestionOffset
+        trayArrow.center.y = arrowDown
         
         suggestedTrayUp = 200
         suggestedTrayDown = suggestedTrayUp + suggestionOffset
+        suggestedCardTray.frame.origin.y = suggestedTrayDown
         
         suggestedParentUp = 231
         suggestedParentDown = suggestedParentUp + suggestionOffset
+        suggestedCardParentView.frame.origin.y = suggestedParentDown
         
         arrowOriginalY = trayArrow.center.y
         suggestedParentOriginalX = suggestedCardParentView.center.x
-        permanentSuggestedParentOriginalX = suggestedParentOriginalX
-        
+        permanentSuggestedParentOriginalX = suggestedCardParentView.center.x
         suggestedScrollOriginalY = suggestedTermsScrollView.center.y
+        suggestedTermsOriginalX = 29
         
         
         //// Deck Cards: set up array, define 'current'////
@@ -223,10 +230,10 @@ class SuggestionViewController: UIViewController {
     } // end viewDidLoad
     
     
-    
     /////////////////////////////////
     ///// Suggested Card Parent//////
     /////////////////////////////////
+    
     
     @IBAction func didPanSuggestedCardParent(_ sender: UIPanGestureRecognizer) {
         
@@ -289,12 +296,12 @@ class SuggestionViewController: UIViewController {
     ////// Suggested Card Tray //////
     /////////////////////////////////
     
+    
     @IBAction func didPanTray(_ sender: UIPanGestureRecognizer) {
         
         let velocity = sender.velocity(in: view)
         let translation = sender.translation(in: view)
         let isMovingDown = velocity.y > 0
-        var show: Bool!
         
         if sender.state == .began {
             
@@ -316,6 +323,8 @@ class SuggestionViewController: UIViewController {
             
             if isMovingDown {
                 
+                toggleTextField(hasFocus: true)
+                
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: {
                     self.suggestedCardTray.frame.origin.y = self.suggestedTrayDown
                     self.suggestedCardParentView.frame.origin.y = self.suggestedParentDown
@@ -327,7 +336,10 @@ class SuggestionViewController: UIViewController {
                 
                 toggleToolbar(alpha: alpha)
                 
+                
             } else { // moving up
+                
+                toggleTextField(hasFocus: false)
                 
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: {
                     self.suggestedCardTray.frame.origin.y = self.suggestedTrayUp
@@ -346,9 +358,11 @@ class SuggestionViewController: UIViewController {
         }
     } // end didPanTray
     
+    
     ////////////////////////////////////////
     /////// Dragging Suggested Cards ///////
     ////////////////////////////////////////
+    
     
     @IBAction func didDragSuggestion(_ sender: UIPanGestureRecognizer) {
         
@@ -579,13 +593,14 @@ class SuggestionViewController: UIViewController {
     
     @IBAction func didTapEthnologyTerm(_ sender: UIButton) {
         
-        // Tapping that button triggers a series of events that exist outside of the array structure that handles all other scrolling. It is a special case that is handled here in an isolated way.
+        // Tapping the "ethnology" suggested term triggers a series of events that exist outside of the array structure that handles all other scrolling. It is a special case that is handled here in an isolated way.
         
         // hide previous terms, show new ones with 'ethnology' selected
         currentSuggestedTerms.alpha = 0
         suggestedTermsEthnology.alpha = 1
+        suggestedTermsEthnology.center.x = currentSuggestedTerms.center.x + 6
         
-        // hide suggestions that have been showing so far
+        // hide suggested cards that have been showing so far
         for card in currentSuggestionArray {
             UIView.animate(withDuration: 0.2, animations: {
                 card.alpha = 0
@@ -606,9 +621,11 @@ class SuggestionViewController: UIViewController {
             })
         })
         
+        run(after: 0.3, closure:{self.resetSuggestionsToBeginning()})
+        
         
         for card in suggestionsEthnology {
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.3, animations: {
                 card.alpha = 1
             })
 
@@ -654,8 +671,13 @@ class SuggestionViewController: UIViewController {
                 withDuration: 0.2,
                 animations: {
                     card.alpha = 0
-                    self.dummyCard.alpha = 1
-                    print ("SHOW dummyCard: dummyCard.alpha = \(self.dummyCard.alpha)")
+                    
+                    if self.suggestedCardTray.frame.origin.y < 300 {
+                        self.dummyCard.alpha = 1
+                        print ("SHOW dummyCard: dummyCard.alpha = \(self.dummyCard.alpha)")
+                    }
+                    
+                    
             })
         }
         
@@ -675,7 +697,7 @@ class SuggestionViewController: UIViewController {
                     // hide the dummy card
                     UIView.animate(withDuration: 0.2, animations: { 
                         self.dummyCard.alpha = 0
-                        print ("SHOW dummyCard: dummyCard.alpha = \(self.dummyCard.alpha)")
+                        print ("HIDE dummyCard: dummyCard.alpha = \(self.dummyCard.alpha)")
                     })
             })
     
@@ -693,6 +715,7 @@ class SuggestionViewController: UIViewController {
         suggestedCardParentView.center.x = permanentSuggestedParentOriginalX
         
         print ("currentSuggestedCardIndex \(currentSuggestedCardIndex)")
+        print ("suggestedCardParentView.center.x = \(suggestedCardParentView.center.x)")
         
     } // end resetSuggestionsToBeginning
     
@@ -703,7 +726,7 @@ class SuggestionViewController: UIViewController {
         print ("running 'showNewSuggestedTerms'")
         print (" ")
         
-        suggestedTermsScrollView.center.x = suggestedScrollOriginalX
+        currentSuggestedTerms.frame.origin.x = suggestedTermsOriginalX
         suggestedTermsScrollView.contentSize = currentSuggestedTerms.frame.size
         
         UIView.animate(
@@ -745,7 +768,18 @@ class SuggestionViewController: UIViewController {
     } // end toggleToolbar
     
     
-    
+    func toggleTextField (hasFocus: Bool){
+        
+        if hasFocus {
+            
+            textFieldForBlinker.becomeFirstResponder()
+            
+        } else {
+            
+            textFieldForBlinker.resignFirstResponder()
+            
+        }
+    }
     
     
 } // END CLASS
