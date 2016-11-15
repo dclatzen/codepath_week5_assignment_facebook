@@ -147,35 +147,27 @@
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="zM6-MS-n3W">
-                                <rect key="frame" x="0.0" y="551" width="374" height="128"/>
+                                <rect key="frame" x="0.0" y="596" width="374" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_terms_amazonian" id="eUa-hZ-F2N">
-                                        <rect key="frame" x="29" y="75" width="729" height="14"/>
+                                        <rect key="frame" x="29" y="32" width="729" height="14"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_terms_cultural_anthropology" id="OhE-pe-o5P">
-                                        <rect key="frame" x="29" y="75" width="624" height="14"/>
+                                        <rect key="frame" x="29" y="32" width="624" height="14"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="6GN-D4-FNe">
-                                        <rect key="frame" x="39" y="105" width="240" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </scrollView>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="5Ws-oz-pqa">
-                                        <rect key="frame" x="49" y="115" width="240" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </scrollView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_terms_linguistic" id="u8Y-V4-gHX">
-                                        <rect key="frame" x="29" y="75" width="703" height="14"/>
+                                        <rect key="frame" x="29" y="32" width="703" height="14"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="suggested_terms_ethnology" id="wBo-2U-Uqg">
-                                        <rect key="frame" x="29" y="75" width="618" height="14"/>
+                                        <rect key="frame" x="29" y="32" width="618" height="14"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="N3j-g7-L6p">
-                                        <rect key="frame" x="336" y="67" width="68" height="30"/>
+                                        <rect key="frame" x="336" y="24" width="68" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="didTapEthnologyTerm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ynv-5M-XR1"/>
@@ -201,6 +193,40 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" misplaced="YES" id="O1h-m8-CLG">
+                                <rect key="frame" x="0.0" y="0.0" width="397" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" misplaced="YES" id="Q4I-bq-0kG">
+                                        <rect key="frame" x="15" y="258" width="343" height="336"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" id="UqV-EV-wct">
+                                                <rect key="frame" x="18" y="81" width="277" height="204"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <string key="text">The comparative study of human cultures and their development. a branch of anthropology focused on the study of cultural variation among humans and is in contrast to social anthropology which perceives cultural variation as a subset of the anthropological constant.
+Since humans acquire culture through the learning processes of enculturation and socialization, people living in different places or different circumstances develop different cultures.</string>
+                                                <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="see_more_group" id="PLB-YW-LaM">
+                                                <rect key="frame" x="0.0" y="219" width="342" height="117"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cultural anthropology" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MNa-uz-jpT">
+                                                <rect key="frame" x="22" y="41" width="211" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="19"/>
+                                                <color key="textColor" red="0.0" green="0.67843137254901964" blue="0.93725490196078431" alpha="0.92000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -213,7 +239,11 @@
                         <outlet property="deckCardParentView" destination="bXQ-Cx-qhO" id="dB0-qg-ZKA"/>
                         <outlet property="dummyCard" destination="dz1-jp-qfR" id="BaN-QH-OBH"/>
                         <outlet property="editorToolbar" destination="3VN-cS-zVF" id="mS6-D0-G4q"/>
+                        <outlet property="realCardBackground" destination="O1h-m8-CLG" id="0ES-aF-R8m"/>
+                        <outlet property="realCardBodyText" destination="UqV-EV-wct" id="g07-kb-Yjb"/>
+                        <outlet property="realSuggestedCard0" destination="Q4I-bq-0kG" id="zo1-XQ-We1"/>
                         <outlet property="replaceIcon" destination="R2k-qm-z90" id="I6u-FM-Mpe"/>
+                        <outlet property="seeMoreGroup" destination="PLB-YW-LaM" id="Cxp-Fz-CIY"/>
                         <outlet property="suggestedCard0" destination="Cix-3v-lTb" id="eyV-HO-DM1"/>
                         <outlet property="suggestedCard1" destination="53F-Ag-bum" id="Lv4-aJ-pSw"/>
                         <outlet property="suggestedCard2" destination="TP1-c6-BC3" id="y5B-vm-qYm"/>
@@ -281,7 +311,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="22" y="41.5"/>
+            <point key="canvasLocation" x="23" y="83.5"/>
         </scene>
     </scenes>
     <resources>
@@ -293,6 +323,7 @@
         <image name="nav1_editor" width="340" height="16"/>
         <image name="recommended_cards_arrow" width="23" height="14"/>
         <image name="replace_symbol" width="139" height="163"/>
+        <image name="see_more_group" width="342" height="117"/>
         <image name="suggested_card_tray" width="389" height="501"/>
         <image name="suggested_terms_amazonian" width="729" height="14"/>
         <image name="suggested_terms_cultural_anthropology" width="624" height="14"/>

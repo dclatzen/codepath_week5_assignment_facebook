@@ -39,6 +39,18 @@ class SuggestionViewController: UIViewController {
     @IBOutlet weak var suggestedCardC2: UIImageView!
     @IBOutlet weak var suggestedCardC3: UIImageView!
     
+    // "Real" version of suggestedCard0 "Cultural Anthropology"
+    @IBOutlet weak var realCardBackground: UIView!
+    @IBOutlet weak var realSuggestedCard0: UIView!
+    @IBOutlet weak var realCardBodyText: UITextView!
+    @IBOutlet weak var seeMoreGroup: UIImageView!
+    
+    var realCardOriginalHeight: CGFloat!
+    var realCardOrignalY: CGFloat!
+    var realTextOriginalHeight: CGFloat!
+    
+    var realCardExpandedOriginalY: CGFloat!
+    
     // Suggestion starter card for the blank deck card. Need this to differentiate that group of suggestions.
     @IBOutlet weak var suggestedCardD1: UIImageView!
     
@@ -154,6 +166,26 @@ class SuggestionViewController: UIViewController {
         suggestedScrollOriginalY = suggestedTermsScrollView.center.y
         suggestedTermsOriginalX = 29
         
+        // Set up the "real" card to expand
+        
+        let cardTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didExpandCard(sender:)))
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(collapseCard(sender:)))
+        
+        suggestedCard0.addGestureRecognizer(cardTapGestureRecognizer)
+        realSuggestedCard0.addGestureRecognizer(panGestureRecognizer)
+
+        
+        realCardOrignalY = realSuggestedCard0.frame.origin.y
+        realCardOriginalHeight = realSuggestedCard0.frame.height
+        realTextOriginalHeight = realCardBodyText.frame.height
+        
+        realSuggestedCard0.alpha = 0
+        realSuggestedCard0.layer.cornerRadius = 8.0
+        realSuggestedCard0.isUserInteractionEnabled = true
+        realCardBackground?.backgroundColor = UIColor(white: 0, alpha: 0)
+        realCardBackground.isHidden = true
+        
+        
         
         //// Deck Cards: set up array, define 'current'////
         // Set up the array of deck cards
@@ -224,6 +256,9 @@ class SuggestionViewController: UIViewController {
         for terms in suggestedTermsArray {
             if terms != suggestedTermsArray[1] {
                 terms.alpha = 0
+            }
+            if terms == suggestedTermsArray[1] {
+                terms.alpha = 1
             }
         }
         
@@ -521,15 +556,16 @@ class SuggestionViewController: UIViewController {
                 
                 ////// 'Load' new suggestions and terms //////
                 
-                // reference the array that has been showing so far
-                previousSuggestionArray = currentSuggestionArray
+                // hide the cards that have been showing so far
+                
                 
                 // reference the array that will be shown
                 currentSuggestionArrayIndex = currentSuggestionArrayIndex - 1
                 currentSuggestionArray = allSuggestionArrays[currentSuggestionArrayIndex]
                 
                 // load the new suggestions
-                showNewSuggestionArray(previousSuggestionArray: previousSuggestionArray, newSuggestionArray: currentSuggestionArray)
+                hidePreviousSuggestionArray()
+                showNewSuggestionArray()
                 
                 print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
                 
@@ -554,15 +590,16 @@ class SuggestionViewController: UIViewController {
                 
                 ////// 'Load' new suggestions //////
                 
-                // reference the array that has been showing so far
-                previousSuggestionArray = currentSuggestionArray
+                // hide the cards that have been showing so far
+                
                 
                 // reference the array that will be shown
                 currentSuggestionArrayIndex = currentSuggestionArrayIndex + 1
                 currentSuggestionArray = allSuggestionArrays[currentSuggestionArrayIndex]
                 
                 // load the new suggestions
-                showNewSuggestionArray(previousSuggestionArray: previousSuggestionArray, newSuggestionArray: currentSuggestionArray)
+                hidePreviousSuggestionArray()
+                showNewSuggestionArray()
                 
                 print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
                 
@@ -633,23 +670,121 @@ class SuggestionViewController: UIViewController {
         
     } // end didTapEthnologyTerm
     
+    ////////////////////////////////////////////
+    /////// Expand and collapse real card //////
+    ////////////////////////////////////////////
+    
+    
+    func didExpandCard( sender: Any) {
+        
+        print ("tapped")
+        
+        realCardBackground.isHidden = false
+        
+        UIView.animate(withDuration: 0.3, animations:{
+            
+            self.realSuggestedCard0.alpha = 1
+            self.realCardBackground.backgroundColor = UIColor(white: 0, alpha: 0.8)
+            
+        })
+        
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: {
+            
+            self.realSuggestedCard0.frame.origin.y = 40
+            
+        })
+        
+        UIView.animate(withDuration: 0.3, delay: 0, animations: {
+            
+            self.realSuggestedCard0.frame.size = CGSize(width: 342, height: 465)
+            
+            self.realCardBodyText.frame.size = CGSize(width: 277, height: (self.realSuggestedCard0.frame.height))
+            
+            self.seeMoreGroup.alpha = 0
+            
+        })
+        
+        
+    } // end didExpandCard
+    
+    
+    func collapseCard( sender: UIPanGestureRecognizer) {
+        
+        let translation = sender.translation(in: view)
+        let velocity = sender.velocity(in: view)
+        realCardExpandedOriginalY = realSuggestedCard0.frame.origin.y
+        
+        if sender.state == .began {
+            
+        } else if sender.state == .changed {
+            
+            realSuggestedCard0.frame.origin.y = realCardExpandedOriginalY + translation.y
+            
+        } else if sender.state == .ended {
+            
+            if velocity.y > 0 {
+               
+                UIView.animate(withDuration: 0.3, animations:{
+                    
+                    self.realSuggestedCard0.alpha = 0
+                    self.realCardBackground.backgroundColor = UIColor(white: 0, alpha: 0)
+                    
+                })
+                
+                UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: {
+                    
+                    self.realSuggestedCard0.frame.origin.y = self.realCardOrignalY
+                    
+                })
+                
+                UIView.animate(withDuration: 0.3, delay: 0, animations: {
+                    
+                    self.realSuggestedCard0.frame.size = CGSize(width: 342, height: self.realCardOriginalHeight)
+                    
+                    self.realCardBodyText.frame.size = CGSize(width: 277, height: self.realTextOriginalHeight)
+                    
+                    self.seeMoreGroup.alpha = 1
+                    
+                })
+                
+                run(after: 0.5, closure: {
+                    self.realCardBackground.isHidden = true
+                })
+                
+                
+            } else {
+                
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.curveEaseOut], animations: { 
+                    self.realSuggestedCard0.frame.origin.y = self.realCardExpandedOriginalY
+                })
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+    }
+    
+    
     
     ///////////////////////////////
     /////// Useful Functions //////
     ///////////////////////////////
     
-    func showNewSuggestionArray(previousSuggestionArray: [UIImageView], newSuggestionArray: [UIImageView]) {
+    func hidePreviousSuggestionArray() {
         
         print (" ")
-        print ("running showNewSuggestionArray")
-        print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
+        print ("running 'hidePreviousSuggestionArray'")
         print (" ")
         
         // Dismiss the special case if applicable (user tapped the "ethnology" suggested term)
         if suggestedTermsEthnology.alpha > 0 {
             
             // hide ethnology suggested terms
-            UIView.animate(withDuration: 0.2, animations: { 
+            UIView.animate(withDuration: 0.2, animations: {
                 self.suggestedTermsEthnology.alpha = 0
             })
             
@@ -661,45 +796,60 @@ class SuggestionViewController: UIViewController {
             }
         }
         
-        // hide suggestions that have been showing so far
+        // Hide any suggestions that have been showing so far
         
-        let delayForNew: Double!
-        delayForNew = 0.7
         
-        for card in previousSuggestionArray {
-            UIView.animate(
-                withDuration: 0.2,
-                animations: {
-                    card.alpha = 0
+        for array in allSuggestionArrays {
+            if array != allSuggestionArrays[currentSuggestionArrayIndex] {
+                
+                for card in array {
                     
+                    UIView.animate(
+                        withDuration: 0.2,
+                        animations: {
+                            card.alpha = 0
+                            print ("card hidden")
+                    })
+                    
+                    // show the dummy card if the tray is up
                     if self.suggestedCardTray.frame.origin.y < 300 {
                         self.dummyCard.alpha = 1
                         print ("SHOW dummyCard: dummyCard.alpha = \(self.dummyCard.alpha)")
                     }
-                    
-                    
-            })
+                }
+            }
         }
-        
-        print ("suggestions0[0].alpha = \(suggestions0[0].alpha)")
+    }
+    
+    func showNewSuggestionArray() {
+
+        print (" ")
+        print ("running showNewSuggestionArray")
+        print ("currentSuggestionArrayIndex: \(currentSuggestionArrayIndex)")
+        print (" ")
+
         
         // show the new suggestions
+        for card in currentSuggestionArray {
+            
             UIView.animate(
                 withDuration: 0.2,
-                delay: delayForNew,
+                delay: 0.7,
                 animations: {
-                    for card in newSuggestionArray {
-                        card.alpha = 1
-                    }
+                    card.alpha = 1
+                    print("card shown")
             },
+                
                 completion: { complete in
-                    
                     // hide the dummy card
-                    UIView.animate(withDuration: 0.2, animations: { 
+                    UIView.animate(withDuration: 0.2, animations: {
                         self.dummyCard.alpha = 0
                         print ("HIDE dummyCard: dummyCard.alpha = \(self.dummyCard.alpha)")
                     })
             })
+        }
+
+    
     
 } // end showNewSuggestionArray
 
@@ -742,9 +892,7 @@ class SuggestionViewController: UIViewController {
                     animations: {
                     newSuggestedTerms.alpha = 1
                 })
-            
         })
-        
         
     } // end showNewSuggestedTerms
     
@@ -760,9 +908,7 @@ class SuggestionViewController: UIViewController {
             
         } else {
             UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations:{
-                
                 self.editorToolbar.alpha = 0
-                
             })
         }
     } // end toggleToolbar
@@ -771,15 +917,29 @@ class SuggestionViewController: UIViewController {
     func toggleTextField (hasFocus: Bool){
         
         if hasFocus {
-            
             textFieldForBlinker.becomeFirstResponder()
             
         } else {
-            
             textFieldForBlinker.resignFirstResponder()
-            
         }
-    }
+    } // end toggleTextField
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 } // END CLASS
